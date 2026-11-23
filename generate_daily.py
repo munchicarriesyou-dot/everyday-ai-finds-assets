@@ -59,8 +59,10 @@ def generate(day=None, root="images"):
     if existing.exists():
         prior = json.loads(existing.read_text(encoding="utf-8"))
         topic = next((t for t in topics if t["id"] == prior.get("content_id")), None)
-        if topic is None and str(prior.get("content_id", "")).startswith("arxiv-"):
-            topic = prior.get("topic_snapshot")
+        if topic is None and isinstance(prior.get("topic_snapshot"), dict):
+            snapshot = prior["topic_snapshot"]
+            if snapshot.get("id") == prior.get("content_id") and all(snapshot.get(k) for k in ("category", "title", "tip", "cta")):
+                topic = snapshot
         if topic is None:
             raise RuntimeError("Existing daily topic is missing; refuse to silently change it")
     else:
