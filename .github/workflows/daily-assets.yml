@@ -1,0 +1,33 @@
+name: Prepare daily Instagram asset (12:00 Argentina)
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 15 * * *'
+permissions:
+  contents: write
+concurrency:
+  group: daily-instagram-asset
+  cancel-in-progress: false
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install 'Pillow>=10,<12'
+      - name: Generate image and manifest
+        run: python generate_daily.py
+      - name: Commit dated assets
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add images/
+          if ! git diff --cached --quiet; then
+            git commit -m "Generate daily Instagram image"
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
