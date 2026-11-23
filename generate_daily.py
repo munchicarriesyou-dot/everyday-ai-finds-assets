@@ -13,7 +13,26 @@ def generate(day=None, root="images"):
     if date > today + timedelta(days=1):
         raise ValueError("Cannot generate more than one day in advance")
     topics = json.loads(Path("data/topics.json").read_text(encoding="utf-8"))
-    topic = topics[date.toordinal() % len(topics)]
+    # Every dated manifest records its source ID. Never recycle a published topic.
+    used = set()
+    for old in Path(root).glob("*/manifest.json"):
+        try:
+            prior = json.loads(old.read_text(encoding="utf-8"))
+            if prior.get("date") != date.isoformat():
+                used.add(prior.get("content_id"))
+        except (OSError, ValueError):
+            continue
+    existing = Path(root) / date.isoformat() / "manifest.json"
+    if existing.exists():
+        prior = json.loads(existing.read_text(encoding="utf-8"))
+        topic = next((t for t in topics if t["id"] == prior.get("content_id")), None)
+        if topic is None:
+            raise RuntimeError("Existing daily topic is missing; refuse to silently change it")
+    else:
+        candidates = [t for t in topics if t["id"] not in used]
+        if not candidates:
+            raise RuntimeError("Content library exhausted: refusing to repeat an old post")
+        topic = candidates[(date.toordinal() * 17) % len(candidates)]
     output = Path(root) / date.isoformat()
     output.mkdir(parents=True, exist_ok=True)
     image_path = output / "post.jpg"
@@ -34,7 +53,7 @@ def generate(day=None, root="images"):
         y += 62
     draw.text((75, 1210), "@everydayaifinds99", font=regular, fill="#5ce1cf")
     image.save(image_path, format="JPEG", quality=92)
-    manifest = {"date": date.isoformat(), "image": "post.jpg", "caption": caption}
+    manifest = {"date": date.isoformat(), "content_id": topic["id"], "category": topic["category"], "image": "post.jpg", "caption": caption}
     (output / "manifest.json").write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
     print("Generated date:", date.isoformat())
 
