@@ -19,6 +19,8 @@ jobs:
         with:
           python-version: '3.12'
       - run: pip install 'Pillow>=10,<12'
+      - name: Check generator syntax
+        run: python -m py_compile generate_daily.py
       - name: Generate image and manifest
         run: python generate_daily.py
       - name: Commit dated assets
