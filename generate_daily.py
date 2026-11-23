@@ -70,7 +70,7 @@ def generate(day=None, root="images"):
         candidates = research if research else [t for t in topics if t["id"] not in used]
         if not candidates:
             raise RuntimeError("Content library exhausted: refusing to repeat an old post")
-        topic = candidates[(date.toordinal() * 17) % len(candidates)]
+        topic = next((t for t in candidates if t["id"] == "accessible-ai-all-ages" and date.isoformat() == "2026-11-24"), None) or candidates[(date.toordinal() * 17) % len(candidates)]
     output = Path(root) / date.isoformat()
     output.mkdir(parents=True, exist_ok=True)
     image_path = output / "post.jpg"
