@@ -1,0 +1,41 @@
+name: Create first public Instagram image
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  image:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install 'Pillow>=10,<12'
+      - name: Render image
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          from PIL import Image, ImageDraw, ImageFont
+          Path("images").mkdir(exist_ok=True)
+          im=Image.new("RGB",(1080,1350),"#101827")
+          d=ImageDraw.Draw(im)
+          font=ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf",58)
+          small=ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf",37)
+          d.text((75,85),"EVERYDAY AI FINDS",font=small,fill="#5ce1cf")
+          for i,line in enumerate(["3 WAYS AI CAN","MAKE YOUR DAY","EASIER"]):
+              d.text((75,260+i*95),line,font=font,fill="white")
+          for i,line in enumerate(["01  Organize your notes","02  Draft smarter emails","03  Plan projects faster"]):
+              d.text((75,740+i*120),line,font=small,fill="#e1ebf5")
+          d.text((75,1220),"@everydayaifinds99",font=small,fill="#5ce1cf")
+          im.save("images/first-post.jpg",quality=92)
+          PY
+      - name: Commit public image
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add images/first-post.jpg
+          if ! git diff --cached --quiet; then
+            git commit -m "Create first Instagram post image"
+            git push
+          fi
