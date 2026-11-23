@@ -75,8 +75,8 @@ def generate(day=None, root="images"):
     caption = "\n\n".join([topic["title"], topic["tip"], topic["cta"],
         "#AITools #ArtificialIntelligence #Productivity #AITips"])
     if topic.get("source_url"):
-        caption += "\\n\\nPrimary source: " + topic["source_url"]
-        caption += "\\nPaper: " + topic["paper_title"]
+        caption += "\n\nPrimary source: " + topic["source_url"]
+        caption += "\nPaper: " + topic["paper_title"]
     image = Image.new("RGB", (1080, 1350), "#101827")
     draw = ImageDraw.Draw(image)
     bold = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", 62)
