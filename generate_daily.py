@@ -67,7 +67,7 @@ def generate(day=None, root="images"):
             raise RuntimeError("Existing daily topic is missing; refuse to silently change it")
     else:
         research = [t for t in research_topics() if t["id"] not in used] if date.toordinal() % 3 == 0 else []
-        candidates = research if research else [t for t in topics if t["id"] not in used]
+        candidates = [t for t in topics if t["id"] not in used] if date.isoformat() == "2026-11-24" else (research if research else [t for t in topics if t["id"] not in used])
         if not candidates:
             raise RuntimeError("Content library exhausted: refusing to repeat an old post")
         topic = next((t for t in candidates if t["id"] == "accessible-ai-all-ages" and date.isoformat() == "2026-11-24"), None) or candidates[(date.toordinal() * 17) % len(candidates)]
