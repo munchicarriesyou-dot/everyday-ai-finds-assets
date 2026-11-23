@@ -1,9 +1,394 @@
 [
- {"title":"Make AI summaries useful","tip":"Ask for a five-bullet summary, then check the original source before sharing.","cta":"Save this practical AI tip."},
- {"title":"Write better prompts","tip":"Give AI your goal, audience, constraints, and an example of the result you want.","cta":"Follow for simple AI workflows."},
- {"title":"Plan your week with AI","tip":"Turn a messy task list into a realistic weekly plan. Review priorities yourself.","cta":"Save this for Monday."},
- {"title":"Use AI to learn faster","tip":"Ask for an explanation, a worked example, and three practice questions.","cta":"Try this with something new today."},
- {"title":"Keep private data private","tip":"Remove passwords, financial details, and personal identifiers before sharing text with AI tools.","cta":"Share this privacy reminder."},
- {"title":"Improve email drafts","tip":"Ask AI for a concise first draft, then add your own voice and verify every detail.","cta":"Follow for practical AI tips."},
- {"title":"Break big goals into steps","tip":"Ask AI to split a project into small milestones with clear next actions.","cta":"Save this idea for your next project."}
+  {
+    "id": "tip-001",
+    "category": "work",
+    "title": "Recruiting: compare job requirements",
+    "tip": "Paste a job description and ask AI to build a skills checklist. Remove candidate names and review decisions yourself.",
+    "cta": "Save this idea and follow @everydayaifinds99 for practical AI."
+  },
+  {
+    "id": "tip-002",
+    "category": "sports",
+    "title": "Running: build a sensible plan",
+    "tip": "Tell AI your weekly running volume and goal. Ask for gradual progression, rest days, and signs to stop.",
+    "cta": "Save this idea and follow @everydayaifinds99 for practical AI."
+  },
+  {
+    "id": "tip-003",
+    "category": "science",
+    "title": "Research: understand an abstract",
+    "tip": "Paste a paper abstract and ask AI to separate the research question, methods, findings, and limitations.",
+    "cta": "Save this idea and follow @everydayaifinds99 for practical AI."
+  },
+  {
+    "id": "tip-004",
+    "category": "education",
+    "title": "Teachers: make practice questions",
+    "tip": "Provide a lesson objective and ask AI for three difficulty levels, with answer explanations you verify.",
+    "cta": "Save this idea and follow @everydayaifinds99 for practical AI."
+  },
+  {
+    "id": "tip-005",
+    "category": "business",
+    "title": "Small business: map customer questions",
+    "tip": "Turn common customer questions into a concise FAQ. Check pricing and policies before publishing.",
+    "cta": "Save this idea and follow @everydayaifinds99 for practical AI."
+  },
+  {
+    "id": "tip-006",
+    "category": "sports",
+    "title": "Football: review match tactics",
+    "tip": "Use your own match notes to ask AI for patterns in possession, pressing, and transitions—not invented statistics.",
+    "cta": "Save this idea and follow @everydayaifinds99 for practical AI."
+  },
+  {
+    "id": "tip-007",
+    "category": "finance",
+    "title": "Finance: organize expense categories",
+    "tip": "Ask AI to design a simple expense taxonomy and budget template. Never paste account numbers.",
+    "cta": "Save this idea and follow @everydayaifinds99 for practical AI."
+  },
+  {
+    "id": "tip-008",
+    "category": "design",
+    "title": "Designers: critique a brief",
+    "tip": "Ask AI to identify unclear audience, accessibility, deliverables, and constraints before you start designing.",
+    "cta": "Save this idea and follow @everydayaifinds99 for practical AI."
+  },
+  {
+    "id": "tip-009",
+    "category": "health",
+    "title": "Fitness: log training consistently",
+    "tip": "Use AI to turn workout notes into a consistent log of exercises, sets, effort, and recovery.",
+    "cta": "Save this idea and follow @everydayaifinds99 for practical AI."
+  },
+  {
+    "id": "tip-010",
+    "category": "technology",
+    "title": "Developers: explain a stack trace",
+    "tip": "Share a sanitized error and minimal reproducible example. Ask AI for hypotheses and tests, not blind fixes.",
+    "cta": "Save this idea and follow @everydayaifinds99 for practical AI."
+  },
+  {
+    "id": "tip-011",
+    "category": "writing",
+    "title": "Writers: find weak arguments",
+    "tip": "Ask AI to list assumptions, missing evidence, and possible counterarguments in your draft.",
+    "cta": "Save this idea and follow @everydayaifinds99 for practical AI."
+  },
+  {
+    "id": "tip-012",
+    "category": "sports",
+    "title": "Cycling: plan hydration stops",
+    "tip": "Use your route distance, conditions, and experience to create a checklist. Check weather and individual needs.",
+    "cta": "Save this idea and follow @everydayaifinds99 for practical AI."
+  },
+  {
+    "id": "tip-013",
+    "category": "sales",
+    "title": "Sales: prepare discovery questions",
+    "tip": "Describe the buyer's industry and ask for open-ended questions about problems, constraints, and success.",
+    "cta": "Save this idea and follow @everydayaifinds99 for practical AI."
+  },
+  {
+    "id": "tip-014",
+    "category": "science",
+    "title": "Statistics: correlation is not causation",
+    "tip": "Ask AI to identify confounders and alternative explanations before interpreting a striking chart.",
+    "cta": "Save this idea and follow @everydayaifinds99 for practical AI."
+  },
+  {
+    "id": "tip-015",
+    "category": "travel",
+    "title": "Travel: compare itineraries",
+    "tip": "Give AI travel dates, pace, and budget. Ask for tradeoffs, then verify opening hours and transport.",
+    "cta": "Save this idea and follow @everydayaifinds99 for practical AI."
+  },
+  {
+    "id": "tip-016",
+    "category": "work",
+    "title": "Meetings: turn notes into actions",
+    "tip": "Ask AI to extract decisions, owners, deadlines, and unresolved questions from notes you are allowed to share.",
+    "cta": "Save this idea and follow @everydayaifinds99 for practical AI."
+  },
+  {
+    "id": "tip-017",
+    "category": "sports",
+    "title": "Strength training: track progression",
+    "tip": "Use AI to compare training logs across weeks and flag large jumps in workload for review.",
+    "cta": "Save this idea and follow @everydayaifinds99 for practical AI."
+  },
+  {
+    "id": "tip-018",
+    "category": "science",
+    "title": "AI benchmarks: read the fine print",
+    "tip": "Before sharing a model ranking, check the benchmark date, dataset, evaluation method, and known limitations.",
+    "cta": "Save this idea and follow @everydayaifinds99 for practical AI."
+  },
+  {
+    "id": "tip-019",
+    "category": "hospitality",
+    "title": "Cafes: improve menu descriptions",
+    "tip": "Ask AI to rewrite menu items clearly and consistently. Verify ingredients and allergens manually.",
+    "cta": "Save this idea and follow @everydayaifinds99 for practical AI."
+  },
+  {
+    "id": "tip-020",
+    "category": "education",
+    "title": "Students: learn with active recall",
+    "tip": "Ask AI for short quizzes based on your notes, answer without looking, then review mistakes.",
+    "cta": "Save this idea and follow @everydayaifinds99 for practical AI."
+  },
+  {
+    "id": "tip-021",
+    "category": "marketing",
+    "title": "Marketing: test headline angles",
+    "tip": "Generate three headline concepts for different customer needs, then test them against real feedback.",
+    "cta": "Save this idea and follow @everydayaifinds99 for practical AI."
+  },
+  {
+    "id": "tip-022",
+    "category": "sports",
+    "title": "Swimming: structure technique notes",
+    "tip": "After a coached session, ask AI to turn your notes into a short drill checklist.",
+    "cta": "Save this idea and follow @everydayaifinds99 for practical AI."
+  },
+  {
+    "id": "tip-023",
+    "category": "technology",
+    "title": "Cybersecurity: redact before prompting",
+    "tip": "Remove API keys, passwords, internal URLs, and personal data before using an external AI assistant.",
+    "cta": "Save this idea and follow @everydayaifinds99 for practical AI."
+  },
+  {
+    "id": "tip-024",
+    "category": "science",
+    "title": "Medical studies: check sample size",
+    "tip": "Ask AI to summarize who was studied, how many participants were included, and whether results generalize.",
+    "cta": "Save this idea and follow @everydayaifinds99 for practical AI."
+  },
+  {
+    "id": "tip-025",
+    "category": "operations",
+    "title": "Operations: write a runbook",
+    "tip": "Ask AI to structure a runbook with triggers, checks, rollback steps, and escalation contacts.",
+    "cta": "Save this idea and follow @everydayaifinds99 for practical AI."
+  },
+  {
+    "id": "tip-026",
+    "category": "sports",
+    "title": "Basketball: scout shot selection",
+    "tip": "Use your own tracked shots to ask AI for a breakdown by court zone; don't invent missing attempts.",
+    "cta": "Save this idea and follow @everydayaifinds99 for practical AI."
+  },
+  {
+    "id": "tip-027",
+    "category": "career",
+    "title": "Career: prepare interview stories",
+    "tip": "Ask AI to structure your real achievements using situation, task, action, and result.",
+    "cta": "Save this idea and follow @everydayaifinds99 for practical AI."
+  },
+  {
+    "id": "tip-028",
+    "category": "science",
+    "title": "Climate charts: check the baseline",
+    "tip": "When reading a climate statistic, ask what years, region, units, and measurement method were used.",
+    "cta": "Save this idea and follow @everydayaifinds99 for practical AI."
+  },
+  {
+    "id": "tip-029",
+    "category": "realestate",
+    "title": "Real estate: compare listings",
+    "tip": "Give AI verified price, area, expenses, and location to build a comparable cost-per-square-meter table.",
+    "cta": "Save this idea and follow @everydayaifinds99 for practical AI."
+  },
+  {
+    "id": "tip-030",
+    "category": "sports",
+    "title": "Hiking: create a safety checklist",
+    "tip": "Ask AI to list route planning, weather checks, water, navigation, and emergency contact essentials.",
+    "cta": "Save this idea and follow @everydayaifinds99 for practical AI."
+  },
+  {
+    "id": "tip-031",
+    "category": "writing",
+    "title": "Emails: make the ask clear",
+    "tip": "Give AI your goal and audience. Ask for a subject line and one specific call to action.",
+    "cta": "Save this idea and follow @everydayaifinds99 for practical AI."
+  },
+  {
+    "id": "tip-032",
+    "category": "science",
+    "title": "Read charts without being misled",
+    "tip": "Ask AI whether a graph starts at zero, uses a log scale, or hides important uncertainty.",
+    "cta": "Save this idea and follow @everydayaifinds99 for practical AI."
+  },
+  {
+    "id": "tip-033",
+    "category": "business",
+    "title": "Customer service: draft calm replies",
+    "tip": "Provide a fictional or anonymized complaint. Ask for an empathetic response and a concrete next step.",
+    "cta": "Save this idea and follow @everydayaifinds99 for practical AI."
+  },
+  {
+    "id": "tip-034",
+    "category": "sports",
+    "title": "Tennis: analyze practice patterns",
+    "tip": "Record your own unforced errors by stroke and situation, then ask AI for a simple practice summary.",
+    "cta": "Save this idea and follow @everydayaifinds99 for practical AI."
+  },
+  {
+    "id": "tip-035",
+    "category": "technology",
+    "title": "Coding: generate test cases",
+    "tip": "Ask AI for edge cases, invalid inputs, and boundary tests before changing production code.",
+    "cta": "Save this idea and follow @everydayaifinds99 for practical AI."
+  },
+  {
+    "id": "tip-036",
+    "category": "science",
+    "title": "Space news: verify the mission date",
+    "tip": "Check the launch agency, mission status, and original announcement before reposting a headline.",
+    "cta": "Save this idea and follow @everydayaifinds99 for practical AI."
+  },
+  {
+    "id": "tip-037",
+    "category": "food",
+    "title": "Restaurants: plan prep workflows",
+    "tip": "Ask AI to group tasks by equipment, timing, and food safety checkpoints; verify safe temperatures.",
+    "cta": "Save this idea and follow @everydayaifinds99 for practical AI."
+  },
+  {
+    "id": "tip-038",
+    "category": "sports",
+    "title": "Mobility: organize warm-up notes",
+    "tip": "Use guidance from your coach or clinician to make a short routine checklist without inventing exercises.",
+    "cta": "Save this idea and follow @everydayaifinds99 for practical AI."
+  },
+  {
+    "id": "tip-039",
+    "category": "education",
+    "title": "Language learning: practice dialogues",
+    "tip": "Ask AI to role-play a realistic conversation and correct your grammar after each reply.",
+    "cta": "Save this idea and follow @everydayaifinds99 for practical AI."
+  },
+  {
+    "id": "tip-040",
+    "category": "science",
+    "title": "Surveys: inspect the questions",
+    "tip": "Before trusting a poll, check sample selection, question wording, field dates, and margin of error.",
+    "cta": "Save this idea and follow @everydayaifinds99 for practical AI."
+  },
+  {
+    "id": "tip-041",
+    "category": "management",
+    "title": "Managers: clarify responsibilities",
+    "tip": "Ask AI to turn a project brief into a draft RACI matrix for team review.",
+    "cta": "Save this idea and follow @everydayaifinds99 for practical AI."
+  },
+  {
+    "id": "tip-042",
+    "category": "sports",
+    "title": "Volleyball: review serve placement",
+    "tip": "Track your serves by target zone and outcome, then ask AI to identify patterns in your own data.",
+    "cta": "Save this idea and follow @everydayaifinds99 for practical AI."
+  },
+  {
+    "id": "tip-043",
+    "category": "finance",
+    "title": "Spreadsheets: audit formulas",
+    "tip": "Ask AI to explain formulas and propose validation checks. Verify totals against original records.",
+    "cta": "Save this idea and follow @everydayaifinds99 for practical AI."
+  },
+  {
+    "id": "tip-044",
+    "category": "science",
+    "title": "AI papers: distinguish claims from tests",
+    "tip": "Ask what authors demonstrated experimentally and what remains speculation or future work.",
+    "cta": "Save this idea and follow @everydayaifinds99 for practical AI."
+  },
+  {
+    "id": "tip-045",
+    "category": "design",
+    "title": "Accessibility: check contrast",
+    "tip": "Ask AI for an accessibility checklist, then measure actual color contrast with a dedicated tool.",
+    "cta": "Save this idea and follow @everydayaifinds99 for practical AI."
+  },
+  {
+    "id": "tip-046",
+    "category": "sports",
+    "title": "Golf: make practice measurable",
+    "tip": "Track fairways, putts, and practice time; ask AI to visualize trends without guessing missing rounds.",
+    "cta": "Save this idea and follow @everydayaifinds99 for practical AI."
+  },
+  {
+    "id": "tip-047",
+    "category": "business",
+    "title": "Entrepreneurs: stress-test assumptions",
+    "tip": "Ask AI for five ways your business idea might fail and what evidence would change your mind.",
+    "cta": "Save this idea and follow @everydayaifinds99 for practical AI."
+  },
+  {
+    "id": "tip-048",
+    "category": "science",
+    "title": "Statistics: understand confidence intervals",
+    "tip": "Ask AI for a plain-language explanation of what a confidence interval does and does not imply.",
+    "cta": "Save this idea and follow @everydayaifinds99 for practical AI."
+  },
+  {
+    "id": "tip-049",
+    "category": "work",
+    "title": "Support teams: improve incident handoffs",
+    "tip": "Ask AI to structure a handoff with impact, timeline, actions tried, owner, and next check.",
+    "cta": "Save this idea and follow @everydayaifinds99 for practical AI."
+  },
+  {
+    "id": "tip-050",
+    "category": "sports",
+    "title": "Rowing: log training effort",
+    "tip": "Record session duration and perceived effort; ask AI to compare trends across weeks.",
+    "cta": "Save this idea and follow @everydayaifinds99 for practical AI."
+  },
+  {
+    "id": "tip-051",
+    "category": "technology",
+    "title": "Privacy: review AI app permissions",
+    "tip": "Before connecting an AI tool, check what data it reads, stores, shares, and can modify.",
+    "cta": "Save this idea and follow @everydayaifinds99 for practical AI."
+  },
+  {
+    "id": "tip-052",
+    "category": "science",
+    "title": "Energy claims: compare units",
+    "tip": "Check whether an energy figure is power, electricity generated, or capacity before comparing technologies.",
+    "cta": "Save this idea and follow @everydayaifinds99 for practical AI."
+  },
+  {
+    "id": "tip-053",
+    "category": "career",
+    "title": "Freelancers: define project scope",
+    "tip": "Ask AI to draft deliverables, exclusions, revision limits, and acceptance criteria.",
+    "cta": "Save this idea and follow @everydayaifinds99 for practical AI."
+  },
+  {
+    "id": "tip-054",
+    "category": "sports",
+    "title": "Climbing: organize session notes",
+    "tip": "Track routes, grades, attempts, and rest; ask AI for trends while respecting your coach's advice.",
+    "cta": "Save this idea and follow @everydayaifinds99 for practical AI."
+  },
+  {
+    "id": "tip-055",
+    "category": "science",
+    "title": "Health headlines: look for absolute risk",
+    "tip": "When a headline quotes a relative risk change, look for the underlying absolute numbers too.",
+    "cta": "Save this idea and follow @everydayaifinds99 for practical AI."
+  },
+  {
+    "id": "tip-056",
+    "category": "business",
+    "title": "Retail: spot inventory patterns",
+    "tip": "Use anonymized weekly sales counts to identify slow-moving items and possible stockouts.",
+    "cta": "Save this idea and follow @everydayaifinds99 for practical AI."
+  }
 ]
