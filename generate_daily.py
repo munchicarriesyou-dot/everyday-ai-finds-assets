@@ -40,6 +40,39 @@ def research_topics():
         })
     return results
 
+def render_story(topic, output):
+    image = Image.new("RGB", (1080, 1920), "#101827")
+    draw = ImageDraw.Draw(image)
+    def block(text, top, bottom, size, bold=False, color="white"):
+        font_path = "/usr/share/fonts/truetype/dejavu/DejaVuSans" + ("-Bold" if bold else "") + ".ttf"
+        for n in range(size, 23, -2):
+            font = ImageFont.truetype(font_path, n)
+            lines = []
+            line = ""
+            for word in text.split():
+                candidate = (line + " " + word).strip()
+                if draw.textlength(candidate, font=font) > 840 and line:
+                    lines.append(line)
+                    line = word
+                else:
+                    line = candidate
+            if line:
+                lines.append(line)
+            spacing = int(n * 0.35)
+            value = "\n".join(lines)
+            bbox = draw.multiline_textbbox((0, 0), value, font=font, spacing=spacing)
+            if bbox[2]-bbox[0] <= 840 and bbox[3]-bbox[1] <= bottom-top:
+                draw.multiline_text((120-bbox[0], top-bbox[1]), value, font=font, spacing=spacing, fill=color)
+                return
+        raise ValueError("Story text cannot fit safe area")
+    block("EVERYDAY AI FINDS", 270, 340, 38, color="#5ce1cf")
+    draw.rounded_rectangle((120, 375, 960, 383), radius=4, fill="#5ce1cf")
+    block(topic["title"].upper(), 450, 850, 88, True)
+    block(topic["tip"], 920, 1390, 55, color="#e1ebf5")
+    block(topic["cta"], 1450, 1580, 38, color="#5ce1cf")
+    block("@everydayaifinds99", 1600, 1660, 34, color="#5ce1cf")
+    image.save(output / "story.jpg", format="JPEG", quality=94)
+
 def generate(day=None, root="images"):
     today = datetime.now(ZoneInfo("America/Argentina/Buenos_Aires")).date()
     date = today if day is None else __import__("datetime").date.fromisoformat(day)
@@ -94,6 +127,7 @@ def generate(day=None, root="images"):
         y += 62
     draw.text((75, 1210), "@everydayaifinds99", font=regular, fill="#5ce1cf")
     image.save(image_path, format="JPEG", quality=92)
+    render_story(topic, output)
     manifest = {"date": date.isoformat(), "content_id": topic["id"], "category": topic["category"], "topic_snapshot": topic, "image": "post.jpg", "caption": caption}
     (output / "manifest.json").write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
     print("Generated date:", date.isoformat())
