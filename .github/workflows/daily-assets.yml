@@ -1,6 +1,11 @@
 name: Prepare daily Instagram asset (12:00 Argentina)
 on:
   workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/daily-assets.yml'
+      - 'commands/story-assets.json'
   schedule:
     - cron: '0 15 * * *'
 permissions:
@@ -22,9 +27,12 @@ jobs:
       - name: Check generator syntax
         run: python -m py_compile generate_daily.py
       - name: Generate image and manifest
-        run: python generate_daily.py
-      - name: Generate matching Instagram Story
-        run: python generate_story.py
+        run: |
+          if [ "${{ github.event_name }}" = push ]; then
+            python -c 'import json; from pathlib import Path; from generate_daily import render_story; from datetime import datetime; from zoneinfo import ZoneInfo; p=Path("images")/datetime.now(ZoneInfo("America/Argentina/Buenos_Aires")).date().isoformat(); render_story(json.loads((p/"manifest.json").read_text())["topic_snapshot"],p)'
+          else
+            python generate_daily.py
+          fi
       - name: Commit dated assets
         run: |
           git config user.name "github-actions[bot]"
