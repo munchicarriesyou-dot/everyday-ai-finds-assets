@@ -1,0 +1,25 @@
+name: Generate first reel
+on:
+  push:
+    paths:
+      - '.github/workflows/first-reel.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install Pillow
+      - run: sudo apt-get update && sudo apt-get install -y ffmpeg
+      - run: python generate_first_reel.py
+      - run: |
+          ffprobe -v error -show_streams -show_format images/reels/2026-11-24.mp4
+          git config user.name github-actions[bot]
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add images/reels/2026-11-24.mp4
+          git diff --cached --quiet || (git commit -m 'Render first reel' && git pull --rebase origin main && git push)
