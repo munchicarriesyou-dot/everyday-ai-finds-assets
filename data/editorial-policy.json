@@ -1,0 +1,12 @@
+{
+  "weights": {
+    "curiosity": 25,
+    "practical": 20,
+    "tools": 15,
+    "success": 15,
+    "debate": 10,
+    "research": 10,
+    "statistics": 5
+  },
+  "exploration": 0.2
+}

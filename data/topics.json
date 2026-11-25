@@ -397,5 +397,29 @@
     "title": "Retail: spot inventory patterns",
     "tip": "Use anonymized weekly sales counts to identify slow-moving items and possible stockouts.",
     "cta": "Save this idea and follow @everydayaifinds99 for practical AI."
+  },
+  {
+    "id": "curiosity-01",
+    "theme": "curiosity",
+    "category": "technology",
+    "title": "Did you know? AI can be confidently wrong",
+    "tip": "A fluent answer is not proof. Ask for sources and check important claims.",
+    "cta": "Follow for practical AI discoveries."
+  },
+  {
+    "id": "debate-01",
+    "theme": "debate",
+    "category": "technology",
+    "title": "Should AI write your work emails?",
+    "tip": "Drafting can save time, but your judgment and responsibility remain essential. Where would you draw the line?",
+    "cta": "Follow for practical AI discoveries."
+  },
+  {
+    "id": "tools-01",
+    "theme": "tools",
+    "category": "technology",
+    "title": "Tool spotlight: AI transcription",
+    "tip": "Turn a recording into searchable notes, with permission from participants. Check names and numbers manually.",
+    "cta": "Follow for practical AI discoveries."
   }
 ]
