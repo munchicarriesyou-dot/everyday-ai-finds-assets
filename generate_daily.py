@@ -151,17 +151,42 @@ def generate_manual(command_path="commands/manual.json"):
     request_id = command.get("request_id", "")
     if not re.fullmatch(r"[A-Za-z0-9_-]{8,100}", request_id):
         raise ValueError("Invalid request ID")
-    topic = command.get("topic", "").strip()
+    topic = command.get("topic") or ""
+    if not isinstance(topic, str):
+        raise ValueError("Topic must be text")
+    topic = topic.strip()
+    selected = None
     if not topic:
-        raise ValueError("Missing topic")
+        # Reuse the same weighted editorial policy and curated topic pool as daily posts.
+        from editorial_policy import choose
+        policy = json.loads(Path("data/editorial-policy.json").read_text(encoding="utf-8"))
+        topics = json.loads(Path("data/topics.json").read_text(encoding="utf-8"))
+        used = set()
+        for prior_path in list(Path("images").glob("*/manifest.json")) + list(Path("manual").glob("*/manifest.json")):
+            try:
+                prior = json.loads(prior_path.read_text(encoding="utf-8"))
+                used.add(prior.get("content_id"))
+            except (OSError, ValueError, TypeError):
+                continue
+        candidates = [item for item in topics if item.get("id") not in used
+                      and isinstance(item.get("title"), str)
+                      and isinstance(item.get("tip"), str)
+                      and any(term in (item["title"] + " " + item["tip"]).lower()
+                              for term in ("ai", "artificial intelligence", "model", "prompt"))]
+        if not candidates:
+            raise RuntimeError("No unused AI-related editorial topics available")
+        selected = choose(candidates, policy, random.SystemRandom())
+        topic = selected["title"]
     output = Path("manual") / request_id
     if output.exists():
         raise FileExistsError("Manual request already generated; refusing overwrite")
     output.mkdir(parents=True)
-    title = "BEFORE YOU SIGN, ASK AI WHAT TO CHECK" if "contract" in topic.lower() else topic
+    title = selected["title"] if selected else ("BEFORE YOU SIGN, ASK AI WHAT TO CHECK" if "contract" in topic.lower() else topic)
     tip = ("Ask AI to flag payment terms, cancellation fees, automatic renewals and obligations. "
            "Remove private information and verify the original clauses. AI is not legal advice."
            if "contract" in topic.lower() else command.get("instructions", "").strip())
+    if selected:
+        tip = selected["tip"]
     if not tip:
         raise ValueError("Manual content requires substantive instructions")
     image = Image.new("RGB", (1080, 1350), "#101827")
@@ -202,6 +227,7 @@ def generate_manual(command_path="commands/manual.json"):
         "date": datetime.now(ZoneInfo("America/Argentina/Buenos_Aires")).date().isoformat(),
         "request_id": request_id, "account": "everyday_ai_finds",
         "content_type": "feed", "topic": topic, "image": "post.jpg",
+        "content_id": selected["id"] if selected else request_id,
         "caption": caption,
     }
     (output / "manifest.json").write_text(json.dumps(manifest, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
