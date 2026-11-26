@@ -1,0 +1,9 @@
+{
+  "request_id": "manual-20261126-contract-ai-002",
+  "action": "generate_and_publish",
+  "account": "everyday_ai_finds",
+  "content_type": "feed",
+  "topic": "How ChatGPT can help identify important clauses before signing a contract",
+  "instructions": "Explain how to identify payment terms, cancellation fees, automatic renewals and obligations. Remove sensitive information before uploading, verify original clauses, and clarify that AI does not replace legal advice. Use English. User approved this topic and requested publication.",
+  "publish": true
+}
