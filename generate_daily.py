@@ -140,8 +140,79 @@ def generate(day=None, root="images"):
     (output / "manifest.json").write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
     print("Generated date:", date.isoformat())
 
+
+def generate_manual(command_path="commands/manual.json"):
+    """Render a requested single-image feed without altering the daily schedule."""
+    import hashlib
+    from datetime import date
+    command = json.loads(Path(command_path).read_text(encoding="utf-8"))
+    if command.get("account") != "everyday_ai_finds" or command.get("content_type") != "feed":
+        raise ValueError("Manual generator supports Everyday AI Finds feed only")
+    request_id = command.get("request_id", "")
+    if not re.fullmatch(r"[A-Za-z0-9_-]{8,100}", request_id):
+        raise ValueError("Invalid request ID")
+    topic = command.get("topic", "").strip()
+    if not topic:
+        raise ValueError("Missing topic")
+    output = Path("manual") / request_id
+    if output.exists():
+        raise FileExistsError("Manual request already generated; refusing overwrite")
+    output.mkdir(parents=True)
+    title = "BEFORE YOU SIGN, ASK AI WHAT TO CHECK" if "contract" in topic.lower() else topic
+    tip = ("Ask AI to flag payment terms, cancellation fees, automatic renewals and obligations. "
+           "Remove private information and verify the original clauses. AI is not legal advice."
+           if "contract" in topic.lower() else command.get("instructions", "").strip())
+    if not tip:
+        raise ValueError("Manual content requires substantive instructions")
+    image = Image.new("RGB", (1080, 1350), "#101827")
+    draw = ImageDraw.Draw(image)
+    bold_path = "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"
+    normal_path = "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf"
+    def draw_block(text, top, bottom, max_size, bold=False, color="white"):
+        font_path = bold_path if bold else normal_path
+        for size in range(max_size, 22, -2):
+            font = ImageFont.truetype(font_path, size)
+            lines = []
+            current = ""
+            for word in text.split():
+                candidate = (current + " " + word).strip()
+                if draw.textlength(candidate, font=font) > 910 and current:
+                    lines.append(current)
+                    current = word
+                else:
+                    current = candidate
+            if current:
+                lines.append(current)
+            spacing = int(size * 0.32)
+            value = "\\n".join(lines)
+            bbox = draw.multiline_textbbox((0, 0), value, font=font, spacing=spacing)
+            if bbox[3] - bbox[1] <= bottom - top:
+                draw.multiline_text((85 - bbox[0], top - bbox[1]), value, font=font, spacing=spacing, fill=color)
+                return
+        raise ValueError("Text cannot fit image safe area")
+    draw_block("EVERYDAY AI FINDS", 80, 170, 40, color="#5ce1cf")
+    draw.rounded_rectangle((85, 205, 995, 213), radius=4, fill="#5ce1cf")
+    draw_block(title.upper(), 285, 655, 66, bold=True)
+    draw_block(tip, 735, 1120, 39, color="#e1ebf5")
+    draw_block("@everydayaifinds99", 1190, 1250, 34, color="#5ce1cf")
+    image_path = output / "post.jpg"
+    image.save(image_path, format="JPEG", quality=94)
+    caption = title + "\\n\\n" + tip + "\\n\\n#AITools #ArtificialIntelligence #AITips #Productivity"
+    manifest = {
+        "date": datetime.now(ZoneInfo("America/Argentina/Buenos_Aires")).date().isoformat(),
+        "request_id": request_id, "account": "everyday_ai_finds",
+        "content_type": "feed", "topic": topic, "image": "post.jpg",
+        "caption": caption,
+    }
+    (output / "manifest.json").write_text(json.dumps(manifest, indent=2, ensure_ascii=False) + "\\n", encoding="utf-8")
+    print("Generated manual request:", request_id)
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--date")
+    parser.add_argument("--manual-command")
     args = parser.parse_args()
-    generate(args.date)
+    if args.manual_command:
+        generate_manual(args.manual_command)
+    else:
+        generate(args.date)
