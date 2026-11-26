@@ -4,8 +4,6 @@ on:
     branches: [main]
     paths:
       - 'commands/manual.json'
-      - 'generate_daily.py'
-      - '.github/workflows/manual-assets.yml'
   workflow_dispatch:
 permissions:
   contents: write
@@ -26,7 +24,13 @@ jobs:
       - name: Validate generator
         run: python -m py_compile generate_daily.py
       - name: Generate requested media and manifest
-        run: python generate_daily.py --manual-command commands/manual.json
+        run: |
+          REQUEST_ID=$(python -c 'import json; print(json.load(open("commands/manual.json"))["request_id"])')
+          if [ -f "manual/$REQUEST_ID/manifest.json" ]; then
+            echo "Manual request already generated; preserving existing media"
+          else
+            python generate_daily.py --manual-command commands/manual.json
+          fi
       - name: Commit manual assets
         run: |
           git config user.name "github-actions[bot]"
