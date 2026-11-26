@@ -1,0 +1,39 @@
+name: Generate manual Instagram assets
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'commands/manual.json'
+      - 'generate_daily.py'
+      - '.github/workflows/manual-assets.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: manual-instagram-assets
+  cancel-in-progress: false
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install 'Pillow>=10,<12'
+      - name: Validate generator
+        run: python -m py_compile generate_daily.py
+      - name: Generate requested media and manifest
+        run: python generate_daily.py --manual-command commands/manual.json
+      - name: Commit manual assets
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add manual/
+          if ! git diff --cached --quiet; then
+            git commit -m "Generate manual Instagram assets"
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
