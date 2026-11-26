@@ -70,7 +70,9 @@ def render_story(topic, output):
     draw.rounded_rectangle((120, 375, 960, 383), radius=4, fill="#5ce1cf")
     block(topic["title"].upper(), 450, 850, 88, True)
     block(topic["tip"], 920, 1390, 55, color="#e1ebf5")
-    block(topic["cta"], 1450, 1580, 38, color="#5ce1cf")
+    # The footer already displays the account handle; avoid repeating it in the CTA.
+    story_cta = re.sub(r"@everydayaifinds99\b", "us", topic["cta"], flags=re.IGNORECASE)
+    block(story_cta, 1450, 1580, 38, color="#5ce1cf")
     block("@everydayaifinds99", 1600, 1660, 34, color="#5ce1cf")
     image.save(output / "story.jpg", format="JPEG", quality=94)
 
