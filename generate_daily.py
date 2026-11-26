@@ -184,7 +184,7 @@ def generate_manual(command_path="commands/manual.json"):
             if current:
                 lines.append(current)
             spacing = int(size * 0.32)
-            value = "\\n".join(lines)
+            value = "\n".join(lines)
             bbox = draw.multiline_textbbox((0, 0), value, font=font, spacing=spacing)
             if bbox[3] - bbox[1] <= bottom - top:
                 draw.multiline_text((85 - bbox[0], top - bbox[1]), value, font=font, spacing=spacing, fill=color)
@@ -197,14 +197,14 @@ def generate_manual(command_path="commands/manual.json"):
     draw_block("@everydayaifinds99", 1190, 1250, 34, color="#5ce1cf")
     image_path = output / "post.jpg"
     image.save(image_path, format="JPEG", quality=94)
-    caption = title + "\\n\\n" + tip + "\\n\\n#AITools #ArtificialIntelligence #AITips #Productivity"
+    caption = title + "\n\n" + tip + "\n\n#AITools #ArtificialIntelligence #AITips #Productivity"
     manifest = {
         "date": datetime.now(ZoneInfo("America/Argentina/Buenos_Aires")).date().isoformat(),
         "request_id": request_id, "account": "everyday_ai_finds",
         "content_type": "feed", "topic": topic, "image": "post.jpg",
         "caption": caption,
     }
-    (output / "manifest.json").write_text(json.dumps(manifest, indent=2, ensure_ascii=False) + "\\n", encoding="utf-8")
+    (output / "manifest.json").write_text(json.dumps(manifest, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
     print("Generated manual request:", request_id)
 
 if __name__ == "__main__":
